@@ -12,7 +12,7 @@ int main()
     //montar o menu
     int opcao;
     do{
-        //system("cls");
+        system("cls");
         printf("Cadastro de produtos \n");
         printf("1. Cadastrar Conta\n");
         printf("2. Atualizar Conta\n");
@@ -40,10 +40,10 @@ int main()
                 listar(vtrContas, p);
                 break;
             case 5:
-                //listarProdutoUnico(vtrProdutos, p);
+                depositar(vtrContas, p);
                 break;
             case 6:
-                //verificarPatrimonio(vtrProdutos, p);
+                sacar(vtrContas, p);
                 break;
             case 7:
                 //imprimir(vtrProdutos, p);

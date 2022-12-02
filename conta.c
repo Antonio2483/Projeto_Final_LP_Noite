@@ -50,6 +50,51 @@ void listar(p_conta pConta[], int tamanho){
         imprimirConta(pConta,i);
         printf("-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     }
+    system("pause");
+}
+
+void depositar(p_conta pConta[], int tamanho){
+    int posicao = procurarConta(pConta,tamanho);
+    int deposito = 0;
+
+    printf("Conta do cliente: %s \n", pConta[posicao]->cliente);
+
+    while(1){
+        printf("Digite o valor para o deposito \n");
+        scanf("%d",&deposito);
+
+        if(deposito <= 0){
+            printf("Digite um valor valido para o deposito \n");
+            continue;
+        }else{
+            pConta[posicao] ->saldo += deposito;
+            printf("Deposito efetuado com sucesso \n");
+            system("pause");
+            return;
+        }
+    }
+}
+
+void sacar(p_conta pConta[], int tamanho){
+    int posicao = procurarConta(pConta,tamanho);
+    int saque = 0;
+
+    printf("Conta do cliente: %s \n", pConta[posicao]->cliente);
+
+    while(1){
+        printf("Digite o valor para o saque \n");
+        scanf("%d",&saque);
+
+        if(saque <= 0){
+            printf("Digite um valor valido para o Saque \n");
+            continue;
+        }else{
+            pConta[posicao] ->saldo -= saque;
+            printf("Saque efetuado com sucesso \n");
+            system("pause");
+            return;
+        }
+    }
 }
 
 void imprimirConta(p_conta const *pConta, int i) {
@@ -61,4 +106,21 @@ void imprimirConta(p_conta const *pConta, int i) {
         printf("Especial: Nao \n");
     }
     printf("Saldo: %.2f \n", pConta[i]->saldo);
+}
+
+int procurarConta(p_conta pConta[], int tamanho){
+    int numeroProcurar = 0;
+    int posicao = -1;
+
+    while(posicao == -1){
+        printf("Digite o numero da conta\n");
+        scanf("%d",&numeroProcurar);
+
+        for(int i = 0; i < tamanho; i++){
+            if(numeroProcurar == pConta[i]->numero){
+            return i;
+            }
+        }
+        printf("Codigo nao encontrado digite novamente \n");
+    }
 }
