@@ -18,9 +18,21 @@ void inicializar(p_conta pConta[], int tamanho){
 void inserir(p_conta pConta[], int posicao){
 
     pConta[posicao] = (p_conta) malloc(sizeof(struct Conta));
+    int numeroConta = 0;
+    int posicaoVetor = 0;
 
     printf("Digite o numero da conta \n");
-    scanf("%d",&pConta[posicao] ->numero);
+    scanf("%d",&numeroConta);
+
+    posicaoVetor = procurarConta(pConta,posicao,numeroConta);
+
+    while(posicaoVetor != -1){
+        printf("O codigo ja existe, digite outro \n");
+        scanf("%d",&numeroConta);
+        posicaoVetor = procurarConta(pConta,posicao,numeroConta);
+    }
+
+    pConta[posicao] ->numero = numeroConta;
 
     fflush(stdin);
     printf("Digite o nome do cliente \n");
@@ -37,11 +49,43 @@ void inserir(p_conta pConta[], int posicao){
 
     pConta[posicao] ->especial = especialInt;
 
-    pConta[posicao] ->saldo = 0;
+    pConta[posicao] ->saldo = 60;
 
     printf("Conta cadastrada com sucesso \n");
     system("pause");
 
+}
+
+void procurar(p_conta pConta[], int tamanho){
+
+}
+
+void alterar(p_conta pConta[], int tamanho){
+    int codConta = lerConta();
+    int posicao = procurarConta(pConta,tamanho,codConta);
+
+    while(posicao == -1){
+        printf("Cliente nao encontrado, digite um codigo valido \n");
+        codConta = lerConta();
+        posicao = procurarConta(pConta,tamanho,codConta);
+    }
+
+    printf("Conta encontrada \n");
+
+    fflush(stdin);
+    printf("Digite o nome do cliente \n");
+    gets(pConta[posicao] ->cliente);
+
+    printf("Informe se a conta e especial(0 para conta normal 1 para especial) \n");
+    int especialInt = 0;
+    scanf("%d",&especialInt);
+
+    while(especialInt !=1 && especialInt != 0){
+        printf("valor incorreto, Digite 1 Para conta especial e 0 para conta comum \n");
+        scanf("%d",&especialInt);
+    };
+
+    pConta[posicao] ->especial = especialInt;
 }
 
 void listar(p_conta pConta[], int tamanho){
@@ -54,8 +98,15 @@ void listar(p_conta pConta[], int tamanho){
 }
 
 void depositar(p_conta pConta[], int tamanho){
-    int posicao = procurarConta(pConta,tamanho);
+    int codConta = lerConta();
+    int posicao = procurarConta(pConta,tamanho,codConta);
     int deposito = 0;
+
+    while(posicao == -1){
+        printf("Cliente nao encontrado, digite um codigo valido \n");
+        codConta = lerConta();
+        posicao = procurarConta(pConta,tamanho,codConta);
+    }
 
     printf("Conta do cliente: %s \n", pConta[posicao]->cliente);
 
@@ -76,12 +127,20 @@ void depositar(p_conta pConta[], int tamanho){
 }
 
 void sacar(p_conta pConta[], int tamanho){
-    int posicao = procurarConta(pConta,tamanho);
+    int codConta = lerConta();
+    int posicao = procurarConta(pConta,tamanho,codConta);
     int saque = 0;
+
+    while(posicao == -1){
+        printf("Cliente nao encontrado, digite um codigo valido \n");
+        codConta = lerConta();
+        posicao = procurarConta(pConta,tamanho,codConta);
+    }
 
     printf("Conta do cliente: %s \n", pConta[posicao]->cliente);
 
     while(1){
+
         printf("Digite o valor para o saque \n");
         scanf("%d",&saque);
 
@@ -97,6 +156,33 @@ void sacar(p_conta pConta[], int tamanho){
     }
 }
 
+void imprimir(p_conta pConta[], int tamanho){
+    int codConta = lerConta();
+    int posicao = procurarConta(pConta,tamanho,codConta);
+    while(posicao == -1){
+        printf("Cliente nao encontrado, digite um codigo valido \n");
+        codConta = lerConta();
+        posicao = procurarConta(pConta,tamanho,codConta);
+    }
+    imprimirConta(pConta,codConta);
+    system("pause");
+}
+
+void saldoGeral(p_conta pConta[], int tamanho){
+    float saltoGeral = 0;
+
+    for(int i =0; i < tamanho; i++){
+
+        saltoGeral += pConta[i]->saldo;
+        // Por algum motivo eu tenho que imprimir a variavel aqui
+        // Se não ele quebra no final
+        printf("Saldo var depois: %lf \n",saltoGeral);
+    }
+
+    printf("O saldo de todas as contas e de: %.2f \n",saldoGeral);
+    system("pause");
+}
+
 void imprimirConta(p_conta const *pConta, int i) {
     printf("Numero: %d \n", pConta[i]->numero);
     printf("Cliente: %s \n", pConta[i]->cliente);
@@ -108,19 +194,25 @@ void imprimirConta(p_conta const *pConta, int i) {
     printf("Saldo: %.2f \n", pConta[i]->saldo);
 }
 
-int procurarConta(p_conta pConta[], int tamanho){
+int lerConta(){
+    int codConta = 0;
+    printf("Digite o numero da conta\n");
+    scanf("%d",&codConta);
+
+    return codConta;
+}
+
+int procurarConta(p_conta pConta[], int tamanho, int codConta){
     int numeroProcurar = 0;
     int posicao = -1;
 
-    while(posicao == -1){
-        printf("Digite o numero da conta\n");
-        scanf("%d",&numeroProcurar);
-
-        for(int i = 0; i < tamanho; i++){
-            if(numeroProcurar == pConta[i]->numero){
-            return i;
-            }
+    for(int i = 0; i < tamanho; i++){
+        if(codConta == pConta[i]->numero){
+            posicao = i;
+            break;
         }
-        printf("Codigo nao encontrado digite novamente \n");
     }
+
+    return posicao;
+
 }

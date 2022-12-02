@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1670015302 source:c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\main.c
+1670022009 source:c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\main.c
 	<stdio.h>
 	<stdlib.h>
 	"conta.h"
 
-1670015430 c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\conta.h
+1670022344 c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\conta.h
 
-1670015573 source:c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\conta.c
+1670021982 source:c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\conta.c
 	<stdio.h>
 	<stdlib.h>
 	"conta.h"

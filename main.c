@@ -31,7 +31,7 @@ int main()
                 p++;
                 break;
             case 2:
-                //atualizar(vtrProdutos, p);
+                alterar(vtrContas, p);
                 break;
             case 3:
                 //comprar(vtrProdutos, p);
@@ -46,13 +46,13 @@ int main()
                 sacar(vtrContas, p);
                 break;
             case 7:
-                //imprimir(vtrProdutos, p);
+                imprimir(vtrContas, p);
                 break;
             case 8:
-                //imprimir(vtrProdutos, p);
+                saldoGeral(vtrContas, p);
                 break;
             case 9:
-                //printf("Fim do programa \n");
+                printf("Fim do programa \n");
                 exit(0);
         }
     }while(opcao!=9);
