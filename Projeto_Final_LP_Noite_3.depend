@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1670013726 source:c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"conta.h"
+
+1670013679 c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\conta.h
+
+1670013693 source:c:\users\antônio\documents\faculdade\projeto_final_lp_noite_3\conta.c
+	<stdio.h>
+	<stdlib.h>
+	"conta.h"
+
